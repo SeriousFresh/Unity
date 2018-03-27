@@ -4,21 +4,44 @@ using UnityEngine;
 
 public class PlayerScript : MonoBehaviour
 {
-
+    [SerializeField]
+    private GameObject prefabLaser;
+    [SerializeField]
+    private float fireRate = 0.25f;
+    [SerializeField]
+    private float canFire = 0.0f;
+    [SerializeField]
     private float speed = 5.0f;
+  
 
 	// Use this for initialization
 	void Start ()
     {
+  
         transform.position = new Vector3(0, 0, 0);
+
 	}
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
         Movement();
+
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButton(0))
+        {
+            Shoot();
+        }
     }
 
+    private void Shoot()
+    {
+        if (Time.time > canFire)
+        {
+            Instantiate(prefabLaser, transform.position + new Vector3(0, 0.88f, 0), Quaternion.identity);
+            canFire = Time.time + fireRate;
+        }
+    }
+    
     private void Movement()
     {
         float inputHorizontal = Input.GetAxis("Horizontal");
