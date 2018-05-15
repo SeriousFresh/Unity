@@ -38,7 +38,7 @@ public class SpawnManagerScript : MonoBehaviour
 	
     IEnumerator EnemySpawnRoutine()
     {
-        while(!gameManager.gameOver)
+        while (gameManager.gameState.Equals(GameManager.GameState.Playing))
         {
             Instantiate(prefabEnemyShip, new Vector3(Random.Range(-7.7f, 7.7f), 6.7f, 0), Quaternion.identity);
             yield return new WaitForSeconds(EnemySpawnRate);
@@ -47,7 +47,7 @@ public class SpawnManagerScript : MonoBehaviour
     
     IEnumerator PowerUpSpawnRoutine()
     {
-        while (!gameManager.gameOver)
+        while (gameManager.gameState.Equals(GameManager.GameState.Playing))
         {
             int randomPowerUp = Random.Range(0, 3);
             Instantiate(powerUps[randomPowerUp], new Vector3(Random.Range(-7.7f, 7.7f), 6.7f, 0), Quaternion.identity);

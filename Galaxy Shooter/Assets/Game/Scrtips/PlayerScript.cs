@@ -142,7 +142,7 @@ public class PlayerScript : MonoBehaviour
         if(lives == 0)
         {
             Instantiate(playerExplosionPrefab, transform.position, Quaternion.identity);
-            gameManager.gameOver = true;
+            gameManager.gameState = GameManager.GameState.OnStart;
             this.UIManager.ShowTitleScrean();
             Destroy(this.gameObject);
 

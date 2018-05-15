@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour {
 
-
-    public bool gameOver = true;
+    public enum GameState {OnStart, Playing};
+    
+    public GameState gameState;
     public GameObject player;
 
     private UIManager UIManager;
@@ -14,17 +15,18 @@ public class GameManager : MonoBehaviour {
     void Start ()
     {
         UIManager = GameObject.Find("Canvas").GetComponent<UIManager>();
+        gameState = GameState.OnStart;
 	}
 	
 	// Update is called once per frame
 	void Update ()
     {
-	    if(gameOver)
+	    if(gameState.Equals(GameState.OnStart))
         {
             if(Input.GetKeyDown(KeyCode.Space))
             {
                 Instantiate(player, Vector3.zero, Quaternion.identity);
-                gameOver = false;
+                gameState = GameState.Playing;
                 this.UIManager.HideTitleScreen();
             }
         }
