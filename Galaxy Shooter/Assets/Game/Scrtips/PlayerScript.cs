@@ -77,7 +77,7 @@ public class PlayerScript : MonoBehaviour
 
     private void Shoot()
     {
-        this.audioSource.Play();
+        audioSource.Play();
         if (Time.time > canFire)
         {
             if(canTripleShot)
